@@ -43,7 +43,6 @@ public class ProductoService {
         productoRepository.deleteById(id);
     }
 
-    // ===== Mapeo =====
 
     private ProductoDTO toDTO(Producto producto) {
         ProductoDTO dto = new ProductoDTO();

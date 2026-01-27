@@ -41,7 +41,7 @@ public class SucursalService {
         sucursalRepository.deleteById(id);
     }
 
-    // ===== Mapeo =====
+
 
     private SucursalDTO toDTO(Sucursal sucursal) {
         SucursalDTO dto = new SucursalDTO();
