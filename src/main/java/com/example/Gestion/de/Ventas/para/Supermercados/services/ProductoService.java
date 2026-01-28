@@ -2,6 +2,7 @@ package com.example.Gestion.de.Ventas.para.Supermercados.services;
 
 import com.example.Gestion.de.Ventas.para.Supermercados.dtos.ProductoDTO;
 import com.example.Gestion.de.Ventas.para.Supermercados.entities.Producto;
+import com.example.Gestion.de.Ventas.para.Supermercados.exceptions.ProductoNotFoundException;
 import com.example.Gestion.de.Ventas.para.Supermercados.repositories.ProductoRepository;
 import org.springframework.stereotype.Service;
 
@@ -30,7 +31,7 @@ public class ProductoService {
 
     public ProductoDTO actualizar(Long id, ProductoDTO dto) {
         Producto producto = productoRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
+                .orElseThrow(() -> new ProductoNotFoundException(id));
 
         producto.setNombre(dto.getNombre());
         producto.setPrecio(dto.getPrecio());

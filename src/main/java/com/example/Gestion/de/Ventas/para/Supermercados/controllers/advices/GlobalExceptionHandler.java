@@ -2,6 +2,7 @@ package com.example.Gestion.de.Ventas.para.Supermercados.controllers.advices;
 
 import com.example.Gestion.de.Ventas.para.Supermercados.exceptions.ProductoNotFoundException;
 import com.example.Gestion.de.Ventas.para.Supermercados.exceptions.SucursalNotFoundException;
+import com.example.Gestion.de.Ventas.para.Supermercados.exceptions.VentaNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -21,6 +22,11 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(SucursalNotFoundException.class)
     public ResponseEntity<String> sucursalNoEncontrada(SucursalNotFoundException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
+    }
+
+    @ExceptionHandler(VentaNotFoundException.class)
+    public ResponseEntity<String> ventaNoEncontrada(VentaNotFoundException ex) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
     }
 

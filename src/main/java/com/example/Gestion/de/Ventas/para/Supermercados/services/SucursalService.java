@@ -2,6 +2,7 @@ package com.example.Gestion.de.Ventas.para.Supermercados.services;
 
 import com.example.Gestion.de.Ventas.para.Supermercados.dtos.SucursalDTO;
 import com.example.Gestion.de.Ventas.para.Supermercados.entities.Sucursal;
+import com.example.Gestion.de.Ventas.para.Supermercados.exceptions.SucursalNotFoundException;
 import com.example.Gestion.de.Ventas.para.Supermercados.repositories.SucursalRepository;
 import org.springframework.stereotype.Service;
 
@@ -29,7 +30,7 @@ public class SucursalService {
 
     public SucursalDTO actualizar(Long id, SucursalDTO dto) {
         Sucursal sucursal = sucursalRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Sucursal no encontrada"));
+                .orElseThrow(() -> new SucursalNotFoundException(id));
 
         sucursal.setNombre(dto.getNombre());
         sucursal.setDireccion(dto.getDireccion());

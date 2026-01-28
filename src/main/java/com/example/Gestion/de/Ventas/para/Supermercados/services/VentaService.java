@@ -7,6 +7,7 @@ import com.example.Gestion.de.Ventas.para.Supermercados.entities.Venta;
 import com.example.Gestion.de.Ventas.para.Supermercados.entities.VentaDetalle;
 import com.example.Gestion.de.Ventas.para.Supermercados.exceptions.ProductoNotFoundException;
 import com.example.Gestion.de.Ventas.para.Supermercados.exceptions.SucursalNotFoundException;
+import com.example.Gestion.de.Ventas.para.Supermercados.exceptions.VentaNotFoundException;
 import com.example.Gestion.de.Ventas.para.Supermercados.repositories.ProductoRepository;
 import com.example.Gestion.de.Ventas.para.Supermercados.repositories.SucursalRepository;
 import com.example.Gestion.de.Ventas.para.Supermercados.repositories.VentaRepository;
@@ -100,7 +101,7 @@ public class VentaService {
 
     public void borrarLogico(Long id) {
         Venta venta = ventaRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Venta no encontrada"));
+                .orElseThrow(() -> new VentaNotFoundException(id));
 
         venta.setActiva(false);
     }
