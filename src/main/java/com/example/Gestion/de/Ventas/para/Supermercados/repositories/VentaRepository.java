@@ -11,4 +11,6 @@ public interface VentaRepository extends JpaRepository<Venta, Long> {
     List<Venta> findBySucursalIdAndActivaTrue(Long sucursalId);
 
     List<Venta> findByFechaBetweenAndActivaTrue(LocalDateTime inicio, LocalDateTime fin);
+
+    List<Venta> findVentasActivasConDetalles();
 }

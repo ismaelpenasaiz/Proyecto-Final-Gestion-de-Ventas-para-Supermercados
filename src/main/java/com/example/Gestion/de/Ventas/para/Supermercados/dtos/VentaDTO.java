@@ -3,6 +3,7 @@ package com.example.Gestion.de.Ventas.para.Supermercados.dtos;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -43,5 +44,14 @@ public class VentaDTO {
         private String producto;
         private Integer cantidad;
         private BigDecimal precioUnitario;
+    }
+
+    @Data
+    @AllArgsConstructor
+    public static class ProductoMasVendidoDTO{
+        private Long productoID;
+        private String nombre;
+        private Long totalVendido;
+
     }
 }
