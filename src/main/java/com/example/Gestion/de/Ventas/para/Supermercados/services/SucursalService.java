@@ -4,6 +4,7 @@ import com.example.Gestion.de.Ventas.para.Supermercados.dtos.SucursalDTO;
 import com.example.Gestion.de.Ventas.para.Supermercados.entities.Sucursal;
 import com.example.Gestion.de.Ventas.para.Supermercados.exceptions.SucursalNotFoundException;
 import com.example.Gestion.de.Ventas.para.Supermercados.repositories.SucursalRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,15 +18,24 @@ public class SucursalService {
         this.sucursalRepository = sucursalRepository;
     }
 
-    public List<SucursalDTO> listar() {
-        return sucursalRepository.findAll()
+    public List<SucursalDTO> listarActivas() {
+        return sucursalRepository.findActivas()
+                .stream()
+                .map(this::toDTO)
+                .toList();
+    }
+
+    public List<SucursalDTO> listarTodas() {
+        return sucursalRepository.findTodos()
                 .stream()
                 .map(this::toDTO)
                 .toList();
     }
 
     public SucursalDTO crear(SucursalDTO dto) {
-        return toDTO(sucursalRepository.save(toEntity(dto)));
+        Sucursal sucursal = toEntity(dto);
+        sucursal.setActiva(true);
+        return toDTO(sucursalRepository.save(sucursal));
     }
 
     public SucursalDTO actualizar(Long id, SucursalDTO dto) {
@@ -34,13 +44,33 @@ public class SucursalService {
 
         sucursal.setNombre(dto.getNombre());
         sucursal.setDireccion(dto.getDireccion());
+        sucursal.setActiva(true); // 💡 inicializamos explícitamente
+        sucursalRepository.save(sucursal);
+
+        if (dto.getNombre() != null) {
+            sucursal.setNombre(dto.getNombre());
+        }
+        if (dto.getDireccion() != null) {
+            sucursal.setDireccion(dto.getDireccion());
+        }
 
         return toDTO(sucursalRepository.save(sucursal));
     }
 
+    @Transactional
     public void eliminar(Long id) {
-        sucursalRepository.deleteById(id);
+        Sucursal sucursal = sucursalRepository.findById(id)
+                .orElseThrow(() -> new SucursalNotFoundException(id));
+
+        // Marcamos la sucursal como inactiva
+        sucursal.setActiva(false);
+
+        // Marcamos todas sus ventas como inactivas
+        sucursal.getVentas().forEach(venta -> venta.setActiva(false));
+
+        sucursalRepository.save(sucursal);
     }
+
 
 
 

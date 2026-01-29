@@ -23,9 +23,16 @@ public class ProductoController {
     }
 
     @Operation(summary = "Listar todos los productos")
+    // GET /api/productos → solo activos
     @GetMapping
-    public List<ProductoDTO> listar() {
-        return productoService.listar();
+    public List<ProductoDTO> listarActivos() {
+        return productoService.listarActivos();
+    }
+
+    // GET /api/productos/todos → todos los productos
+    @GetMapping("/todos")
+    public List<ProductoDTO> listarTodos() {
+        return productoService.listarTodos();
     }
 
     @Operation(summary = "Crear un nuevo producto")
@@ -38,7 +45,7 @@ public class ProductoController {
     @Operation(summary = "Actualizar un producto existente")
     @PutMapping("/{id}")
     public ProductoDTO actualizar(@PathVariable Long id,
-                                  @Valid @RequestBody ProductoDTO dto) {
+                                  @RequestBody ProductoDTO dto) {
         return productoService.actualizar(id, dto);
     }
 

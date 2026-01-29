@@ -3,12 +3,12 @@ package com.example.Gestion.de.Ventas.para.Supermercados.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "sucursales")
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@Data
 public class Sucursal {
 
     @Id
@@ -20,5 +20,10 @@ public class Sucursal {
 
     @Column(nullable = false)
     private String direccion;
+
+    private boolean activa = true;
+
+    @OneToMany(mappedBy = "sucursal")
+    private List<Venta> ventas = new ArrayList<>();
 }
 

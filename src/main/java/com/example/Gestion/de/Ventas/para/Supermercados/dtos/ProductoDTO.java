@@ -12,10 +12,8 @@ public class ProductoDTO {
 
     private Long id;
 
-    @NotBlank(message = "El nombre es obligatorio")
     private String nombre;
 
-    @NotNull(message = "El precio es obligatorio")
     @Positive(message = "El precio debe ser mayor a 0")
     private BigDecimal precio;
 

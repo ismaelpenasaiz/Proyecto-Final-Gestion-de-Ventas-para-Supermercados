@@ -8,10 +8,8 @@ public class SucursalDTO {
 
     private Long id;
 
-    @NotBlank(message = "El nombre es obligatorio")
     private String nombre;
 
-    @NotBlank(message = "La dirección es obligatoria")
     private String direccion;
 
 }

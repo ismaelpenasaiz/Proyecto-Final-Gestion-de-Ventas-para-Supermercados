@@ -15,4 +15,5 @@ public interface VentaRepository extends JpaRepository<Venta, Long> {
 
     @Query("SELECT DISTINCT v FROM Venta v LEFT JOIN FETCH v.detalles WHERE v.activa = true")
     List<Venta> findVentasActivasConDetalles();
+
 }

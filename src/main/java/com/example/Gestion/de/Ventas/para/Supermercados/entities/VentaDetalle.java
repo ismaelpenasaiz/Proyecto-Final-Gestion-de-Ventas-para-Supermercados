@@ -1,34 +1,30 @@
 package com.example.Gestion.de.Ventas.para.Supermercados.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.math.BigDecimal;
 
 @Entity
 @Table(name = "venta_detalle")
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@Data
 public class VentaDetalle {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "venta_id")
-    private Venta venta;
-
-    @ManyToOne
-    @JoinColumn(name = "producto_id")
+    // Producto asociado
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "producto_id", nullable = false)
     private Producto producto;
 
-    private Integer cantidad;
+    // Venta asociada
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "venta_id", nullable = false)
+    private Venta venta;
 
+    private Integer cantidad;
     private BigDecimal precioUnitario;
+
 }

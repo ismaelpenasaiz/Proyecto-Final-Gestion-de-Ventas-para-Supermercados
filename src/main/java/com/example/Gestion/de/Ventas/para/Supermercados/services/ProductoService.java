@@ -17,8 +17,17 @@ public class ProductoService {
         this.productoRepository = productoRepository;
     }
 
-    public List<ProductoDTO> listar() {
-        return productoRepository.findAll()
+    // Listado solo activos
+    public List<ProductoDTO> listarActivos() {
+        return productoRepository.findActivos()
+                .stream()
+                .map(this::toDTO)
+                .toList();
+    }
+
+    // Listado de todos
+    public List<ProductoDTO> listarTodos() {
+        return productoRepository.findTodos()
                 .stream()
                 .map(this::toDTO)
                 .toList();
@@ -33,17 +42,34 @@ public class ProductoService {
         Producto producto = productoRepository.findById(id)
                 .orElseThrow(() -> new ProductoNotFoundException(id));
 
-        producto.setNombre(dto.getNombre());
-        producto.setPrecio(dto.getPrecio());
-        producto.setCategoria(dto.getCategoria());
+        if (dto.getNombre() != null) {
+            producto.setNombre(dto.getNombre());
+        }
+
+        if (dto.getPrecio() != null) {
+            producto.setPrecio(dto.getPrecio());
+        }
+
+        if (dto.getCategoria() != null) {
+            producto.setCategoria(dto.getCategoria());
+        }
 
         return toDTO(productoRepository.save(producto));
     }
 
     public void eliminar(Long id) {
-        productoRepository.deleteById(id);
-    }
+        Producto producto = productoRepository.findById(id)
+                .orElseThrow(() -> new ProductoNotFoundException(id));
 
+        if (!producto.getDetalles().isEmpty()) {
+            // Tiene ventas, solo borrado lógico
+            producto.setActivo(false);
+            productoRepository.save(producto);
+        } else {
+            // Nunca vendido, se puede borrar físicamente
+            productoRepository.delete(producto);
+        }
+    }
 
     private ProductoDTO toDTO(Producto producto) {
         ProductoDTO dto = new ProductoDTO();

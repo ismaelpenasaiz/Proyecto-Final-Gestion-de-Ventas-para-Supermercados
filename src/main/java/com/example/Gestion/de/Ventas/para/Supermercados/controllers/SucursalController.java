@@ -23,9 +23,15 @@ public class SucursalController {
 
     @Operation(summary = "Listar todas las sucursales")
     @GetMapping
-    public List<SucursalDTO> listar() {
-        return sucursalService.listar();
+    public List<SucursalDTO> listarActivas() {
+        return sucursalService.listarActivas();
     }
+
+    @GetMapping("/todas")
+    public List<SucursalDTO> listarTodas() {
+        return sucursalService.listarTodas();
+    }
+
 
     @Operation(summary = "Crear una nueva sucursal")
     @PostMapping
@@ -36,7 +42,7 @@ public class SucursalController {
     @Operation(summary = "Actualizar una sucursal existente")
     @PutMapping("/{id}")
     public SucursalDTO actualizar(@PathVariable Long id,
-                                  @Valid @RequestBody SucursalDTO dto) {
+                                  @RequestBody SucursalDTO dto) {
         return sucursalService.actualizar(id, dto);
     }
 

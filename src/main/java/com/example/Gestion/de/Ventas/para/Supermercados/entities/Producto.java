@@ -3,6 +3,8 @@ package com.example.Gestion.de.Ventas.para.Supermercados.entities;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 import lombok.*;
 
@@ -26,4 +28,9 @@ public class Producto {
     private BigDecimal precio;
 
     private String categoria;
+
+    private boolean activo = true;
+
+    @OneToMany(mappedBy = "producto")
+    private List<VentaDetalle> detalles = new ArrayList<>();
 }

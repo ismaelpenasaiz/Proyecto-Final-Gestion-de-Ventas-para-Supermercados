@@ -28,6 +28,11 @@ public class VentaDTO {
 
         @NotEmpty
         private List<ItemVentaDTO> items;
+
+        public static class ProductoCantidadDTO {
+            private Long productoId;
+            private Long cantidad;
+        }
     }
 
     @Data

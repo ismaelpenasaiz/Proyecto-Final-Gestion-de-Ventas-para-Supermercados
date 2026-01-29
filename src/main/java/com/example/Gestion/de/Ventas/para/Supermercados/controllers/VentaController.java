@@ -35,9 +35,10 @@ public class VentaController {
     @GetMapping
     public List<VentaDTO.VentaResponseDTO> listar(
             @RequestParam(required = false) Long sucursalId,
-            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fecha) {
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fecha,
+            @RequestParam(required = false) Boolean soloActivas) {
 
-        return ventaService.listar(sucursalId, fecha);
+        return ventaService.listar(sucursalId, fecha, soloActivas);
     }
 
     @Operation(summary = "Anular una venta (borrado lógico)")

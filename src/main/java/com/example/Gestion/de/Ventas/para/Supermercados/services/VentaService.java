@@ -37,6 +37,7 @@ public class VentaService {
 
     public VentaDTO.VentaResponseDTO registrarVenta(VentaDTO.VentaRequestDTO request) {
 
+        // Buscar sucursal
         Sucursal sucursal = sucursalRepository.findById(request.getSucursalId())
                 .orElseThrow(() -> new SucursalNotFoundException(request.getSucursalId()));
 
@@ -45,10 +46,13 @@ public class VentaService {
         venta.setSucursal(sucursal);
         venta.setActiva(true);
 
+        // Crear detalles de venta
         List<VentaDetalle> detalles = request.getItems().stream().map(item -> {
 
-            Producto producto = productoRepository.findById(item.getProductoId())
-                    .orElseThrow(() -> new ProductoNotFoundException(item.getProductoId()));
+            // Buscar producto activo
+            Producto producto = productoRepository.findActivoById(item.getProductoId())
+                    .orElseThrow(() -> new IllegalArgumentException(
+                            "El producto con ID " + item.getProductoId() + " no existe o no está activo."));
 
             VentaDetalle detalle = new VentaDetalle();
             detalle.setVenta(venta);
@@ -62,6 +66,7 @@ public class VentaService {
 
         venta.setDetalles(detalles);
 
+        // Calcular total
         BigDecimal total = detalles.stream()
                 .map(d -> d.getPrecioUnitario()
                         .multiply(BigDecimal.valueOf(d.getCantidad())))
@@ -73,26 +78,17 @@ public class VentaService {
     }
 
 
-    public List<VentaDTO.VentaResponseDTO> listar(Long sucursalId, LocalDate fecha) {
 
-        List<Venta> ventas;
+    public List<VentaDTO.VentaResponseDTO> listar(Long sucursalId, LocalDate fecha, Boolean soloActivas) {
+        List<Venta> ventas = ventaRepository.findAll();
 
-        if (sucursalId != null) {
-            ventas = ventaRepository.findBySucursalIdAndActivaTrue(sucursalId);
-
-        } else if (fecha != null) {
-            LocalDateTime inicio = fecha.atStartOfDay();
-            LocalDateTime fin = fecha.atTime(23, 59, 59);
-
-            ventas = ventaRepository.findByFechaBetweenAndActivaTrue(inicio, fin);
-
-        } else {
-            ventas = ventaRepository.findAll()
-                    .stream()
-                    .filter(Venta::isActiva)
+        if (soloActivas != null) {
+            ventas = ventas.stream()
+                    .filter(v -> v.isActiva() == soloActivas)
                     .toList();
         }
 
+        // filtrado por sucursal/fecha como antes
         return ventas.stream()
                 .map(this::toResponseDTO)
                 .toList();
@@ -105,6 +101,8 @@ public class VentaService {
 
         venta.setActiva(false);
     }
+
+
 
     private VentaDTO.VentaResponseDTO toResponseDTO(Venta venta) {
         VentaDTO.VentaResponseDTO dto = new VentaDTO.VentaResponseDTO();
