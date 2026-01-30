@@ -21,7 +21,7 @@ public class Sucursal {
     @Column(nullable = false)
     private String direccion;
 
-    private boolean activa = true;
+    private Boolean activa = true;
 
     @OneToMany(mappedBy = "sucursal")
     private List<Venta> ventas = new ArrayList<>();

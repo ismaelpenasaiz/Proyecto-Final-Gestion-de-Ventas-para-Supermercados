@@ -41,6 +41,11 @@ public class VentaService {
         Sucursal sucursal = sucursalRepository.findById(request.getSucursalId())
                 .orElseThrow(() -> new SucursalNotFoundException(request.getSucursalId()));
 
+        if (!Boolean.TRUE.equals(sucursal.getActiva())) {
+            throw new IllegalStateException(
+                    "No se puede registrar la venta: la sucursal está inactiva");
+        }
+
         Venta venta = new Venta();
         venta.setFecha(LocalDateTime.now());
         venta.setSucursal(sucursal);

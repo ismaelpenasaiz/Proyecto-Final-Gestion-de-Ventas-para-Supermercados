@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface SucursalRepository extends JpaRepository<Sucursal, Long> {
-    @Query("SELECT s FROM Sucursal s WHERE s.activo = true")
+    @Query("SELECT s FROM Sucursal s WHERE s.activa = true")
     List<Sucursal> findActivas();
 
     // Todos los productos, activos o no

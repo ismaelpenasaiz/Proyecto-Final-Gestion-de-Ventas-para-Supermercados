@@ -12,5 +12,7 @@ public class SucursalDTO {
 
     private String direccion;
 
+    private Boolean activa;
+
 }
 

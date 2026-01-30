@@ -42,16 +42,16 @@ public class SucursalService {
         Sucursal sucursal = sucursalRepository.findById(id)
                 .orElseThrow(() -> new SucursalNotFoundException(id));
 
-        sucursal.setNombre(dto.getNombre());
-        sucursal.setDireccion(dto.getDireccion());
-        sucursal.setActiva(true); // 💡 inicializamos explícitamente
-        sucursalRepository.save(sucursal);
-
         if (dto.getNombre() != null) {
             sucursal.setNombre(dto.getNombre());
         }
+
         if (dto.getDireccion() != null) {
             sucursal.setDireccion(dto.getDireccion());
+        }
+
+        if (dto.getActiva() != null) {
+            sucursal.setActiva(dto.getActiva());
         }
 
         return toDTO(sucursalRepository.save(sucursal));
