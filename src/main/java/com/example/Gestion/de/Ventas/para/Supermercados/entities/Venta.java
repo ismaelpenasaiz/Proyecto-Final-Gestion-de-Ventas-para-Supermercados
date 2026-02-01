@@ -36,3 +36,4 @@ public class Venta {
 
     private boolean activa = true; // 💡 borrado lógico
 }
+

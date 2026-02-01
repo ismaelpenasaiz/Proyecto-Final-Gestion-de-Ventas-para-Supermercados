@@ -1,5 +1,6 @@
 package com.example.Gestion.de.Ventas.para.Supermercados.dtos;
 
+
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
@@ -12,6 +13,7 @@ public class ProductoDTO {
 
     private Long id;
 
+    @NotBlank(message = "El nombre del producto no puede estar vacío")
     private String nombre;
 
     @Positive(message = "El precio debe ser mayor a 0")

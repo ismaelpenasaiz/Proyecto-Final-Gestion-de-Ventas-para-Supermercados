@@ -22,6 +22,8 @@ public interface VentaRepository extends JpaRepository<Venta, Long> {
 
     @Query("""
         SELECT v FROM Venta v
+        LEFT JOIN FETCH v.detalles d
+        LEFT JOIN FETCH d.producto
         WHERE (:sucursalId IS NULL OR v.sucursal.id = :sucursalId)
           AND (:inicio IS NULL OR v.fecha >= :inicio)
           AND (:fin IS NULL OR v.fecha <= :fin)

@@ -18,6 +18,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @Transactional
@@ -85,18 +86,28 @@ public class VentaService {
 
 
     public List<VentaDTO.VentaResponseDTO> listar(Long sucursalId, LocalDate fecha, Boolean soloActivas) {
-        List<Venta> ventas = ventaRepository.findAll();
 
-        if (soloActivas != null) {
-            ventas = ventas.stream()
-                    .filter(v -> v.isActiva() == soloActivas)
-                    .toList();
+
+        LocalDateTime inicio = null;
+        LocalDateTime fin = null;
+
+        if (fecha != null) {
+            inicio = fecha.atStartOfDay();
+            fin = fecha.atTime(23, 59, 59);
         }
 
-        // filtrado por sucursal/fecha como antes
+        List<Venta> ventas = ventaRepository.findVentasFiltradas(
+                sucursalId,
+                inicio,
+                fin,
+                soloActivas
+        );
+
         return ventas.stream()
                 .map(this::toResponseDTO)
                 .toList();
+
+
     }
 
 
