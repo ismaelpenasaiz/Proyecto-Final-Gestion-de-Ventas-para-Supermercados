@@ -24,14 +24,23 @@ El proyecto aplica buenas prácticas de arquitectura, separación por capas, uso
 🏗️ Arquitectura del Proyecto
 📂 Estructura principal
 Organización por capas (Clean Architecture)
+
 controller  → Endpoints REST
+
 service     → Lógica de negocio
+
 repository  → Acceso a datos (JPA)
+
 entities    → Entidades JPA
+
 dtos        → Objetos de transferencia
+
 exceptions  → Manejo de errores
+
 security    → JWT + Spring Security
+
 config      → Swagger / configuración
+
 tests       → Unitarios + Integración
 
 Esta separación facilita:
@@ -68,7 +77,9 @@ Usuario
 
 Relaciones
 Sucursal 1 ──── * Venta
+
 Venta    1 ──── * VentaDetalle
+
 Producto 1 ──── * VentaDetalle
 🔐 Seguridad
 
@@ -87,6 +98,7 @@ Filtro de autorización
 Reglas
 
 ✅ GET → público
+
 🔒 POST / PUT / DELETE → requiere token
 
 Header:
@@ -157,16 +169,25 @@ Ejemplo:
 ventas.stream()
 .flatMap(v -> v.getDetalles().stream())
 .collect(Collectors.groupingBy(...))
+
 🧠 Buenas Prácticas Aplicadas
 
 ✅ DTOs para desacoplar entidades
+
 ✅ ResponseEntity + códigos HTTP
+
 ✅ Validaciones
+
 ✅ Manejo global de errores
+
 ✅ Arquitectura por capas
+
 ✅ Streams / Lambdas
+
 ✅ Soft delete en ventas
+
 ✅ Seguridad JWT
+
 ✅ Swagger
 
 ⚠️ Manejo de Errores Global
@@ -213,59 +234,69 @@ No modifica la BD real
 ▶️ Cómo ejecutar el proyecto
 1️⃣ Clonar
 git clone <repo>
-cd proyecto
 2️⃣ Configurar MySQL
 
 Crear BD:
 
-CREATE DATABASE supermercado_db;
-
-Editar application.properties:
-
-spring.datasource.url=jdbc:mysql://localhost:3306/supermercado_db
-spring.datasource.username=root
-spring.datasource.password=1234
-3️⃣ Ejecutar
-mvn spring-boot:run
-
-o desde el IDE.
+CREATE DATABASE supermercado;
 
 📬 Postman
 
 Incluye colección con:
 
 ✅ Todos los endpoints
+
 ✅ Auth JWT
+
 ✅ Casos de prueba
 
 📈 Funcionalidades Extra Implementadas
 
 ✔ Autenticación JWT
+
 ✔ Swagger
+
 ✔ Estadísticas con Streams
+
 ✔ Soft delete ventas
+
 ✔ Tests
+
 ✔ Arquitectura limpia
+
 ✔ Manejo global de excepciones
 
 🎯 Objetivos cumplidos de la prueba
 Requisito	Estado
+
 CRUD JPA	✅
+
 Relaciones	✅
+
 DTOs	✅
+
 Swagger	✅
+
 JWT	✅
+
 Excepciones globales	✅
+
 Streams	✅
+
 Test unitario	✅
+
 Test integración	✅
+
 Arquitectura modular	✅
 
 👨‍💻 Autores
 
 Ismael Peña
+
 Sebastian Riveros
+
 Leonardo de Oliveira
+
 Sergio Gago
 
 Proyecto realizado como prueba técnica.
