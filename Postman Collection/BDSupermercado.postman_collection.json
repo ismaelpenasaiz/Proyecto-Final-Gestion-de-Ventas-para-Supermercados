@@ -1,0 +1,479 @@
+{
+  "info": {
+    "_postman_id": "97dbcaaa-1b20-4996-8846-40064aed3ae5",
+    "name": "BDSupermercado",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "52204904",
+    "_collection_link": "https://go.postman.co/collection/41360790-97dbcaaa-1b20-4996-8846-40064aed3ae5?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "CREAR SUCURSAL",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJpc21hZWwyIiwiaWF0IjoxNzcwNTYzMTY5LCJleHAiOjE3NzA2NDk1Njl9.tuvWE6QeE896Yyp3bERdIVV0b4BTzLT1dkf5zw8Kiho",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"nombre\": \"Pruba S.L\",\r\n  \"direccion\": \"Calle Principal 13\"\r\n}\r\n\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/sucursales",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "sucursales"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "LISTAR SUCURSALES",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"sucursalId\": 1,\r\n  \"productos\": [\r\n    {\"productoId\": 1, \"cantidad\": 2},\r\n    {\"productoId\": 2, \"cantidad\": 3}\r\n  ]\r\n}\r\n\r\n\r\n"
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/sucursales",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "sucursales"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "ACTUALIZAR SUCURSAL",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJpc21hZWwyIiwiaWF0IjoxNzcwNTYzMTY5LCJleHAiOjE3NzA2NDk1Njl9.tuvWE6QeE896Yyp3bERdIVV0b4BTzLT1dkf5zw8Kiho",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"nombre\": \"Pruebas S.L\",\r\n  \"direccion\": \"Calle Principal 5\",\r\n  \"activa\": \"true\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/sucursales/1",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "sucursales",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "ELIMINAR SUCRUSAL",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJpc21hZWwyIiwiaWF0IjoxNzcwNTYzMTY5LCJleHAiOjE3NzA2NDk1Njl9.tuvWE6QeE896Yyp3bERdIVV0b4BTzLT1dkf5zw8Kiho",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8080/api/sucursales/1",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "sucursales",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "CREAR VENTA",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJpc21hZWwyIiwiaWF0IjoxNzcwNTYzMTY5LCJleHAiOjE3NzA2NDk1Njl9.tuvWE6QeE896Yyp3bERdIVV0b4BTzLT1dkf5zw8Kiho",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"sucursalId\": 3,\r\n  \"items\": [\r\n    {\r\n      \"productoId\": 1,\r\n      \"cantidad\": 2\r\n    },\r\n    {\r\n      \"productoId\": 2,\r\n      \"cantidad\": 20\r\n    }\r\n  ]\r\n}\r\n\r\n"
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/ventas",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "ventas"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "LISTAR VENTAS",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/ventas",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "ventas"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "ELIMINAR VENTAS",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/ventas/5",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "ventas",
+            "5"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "CREAR PRODUCTOS",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJpc21hZWwyIiwiaWF0IjoxNzcwNTYzMTY5LCJleHAiOjE3NzA2NDk1Njl9.tuvWE6QeE896Yyp3bERdIVV0b4BTzLT1dkf5zw8Kiho",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"nombre\": \"Platanos Maduros\",\r\n  \"precio\": 1.50,\r\n  \"categoria\": \"Fruta\"\r\n}\r\n\r\n"
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/productos",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "productos"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "LISTAR PRODUCTOS ACTIVOS",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/productos",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "productos"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "LISTAR TODOS PRODUCTOS",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"nombre\": \"Leche\",\r\n  \"precio\": 2.50,\r\n  \"categoria\": \"Lácteos\"\r\n}\r\n\r\n"
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/productos/todos",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "productos",
+            "todos"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "ACTUALIZAR PRODUCTOS",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJpc21hZWwyIiwiaWF0IjoxNzcwNTYzMTY5LCJleHAiOjE3NzA2NDk1Njl9.tuvWE6QeE896Yyp3bERdIVV0b4BTzLT1dkf5zw8Kiho",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"nombre\": \"Manzana\",\r\n  \"precio\": 1.10,\r\n  \"categoria\": \"Fruta\"\r\n}\r\n\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/productos/2",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "productos",
+            "2"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "BORRAR PRODUCTO",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJpc21hZWwyIiwiaWF0IjoxNzcwNTYzMTY5LCJleHAiOjE3NzA2NDk1Njl9.tuvWE6QeE896Yyp3bERdIVV0b4BTzLT1dkf5zw8Kiho",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/productos/3",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "productos",
+            "3"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "TOP PRODUCTO",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/estadisticas/producto-mas-vendido",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "estadisticas",
+            "producto-mas-vendido"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "REGISTRAR USUARIO",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"username\": \"ismael\",\r\n  \"password\": \"\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/auth/register",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "auth",
+            "register"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "LOGIN USUARIO",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"username\": \"ismael\",\r\n  \"password\": \"\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/auth/login",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "auth",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
