@@ -46,7 +46,7 @@ public class VentaService {
             throw new IllegalStateException(
                     "No se puede registrar la venta: la sucursal está inactiva");
         }
-
+        // crea una nueva venta como objeto
         Venta venta = new Venta();
         venta.setFecha(LocalDateTime.now());
         venta.setSucursal(sucursal);
@@ -79,12 +79,13 @@ public class VentaService {
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
 
         venta.setTotal(total);
-
+        // Se guarda la venta también los detalles gracias a la relación @OneToMany
+        // se convierte en DTO
         return toResponseDTO(ventaRepository.save(venta));
     }
 
 
-
+        // permite filtro por sucursal, fecha, y ventas activas
     public List<VentaDTO.VentaResponseDTO> listar(Long sucursalId, LocalDate fecha, Boolean soloActivas) {
 
 
