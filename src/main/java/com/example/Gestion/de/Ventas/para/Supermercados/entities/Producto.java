@@ -31,6 +31,9 @@ public class Producto {
 
     private boolean activo = true;
 
+    @Column(nullable = false)
+    private Integer stock = 0;
+
     @OneToMany(mappedBy = "producto")
     private List<VentaDetalle> detalles = new ArrayList<>();
 }

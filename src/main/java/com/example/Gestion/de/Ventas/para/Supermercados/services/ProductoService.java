@@ -54,6 +54,10 @@ public class ProductoService {
             producto.setCategoria(dto.getCategoria());
         }
 
+        if (dto.getStock() != null) {
+            producto.setStock(dto.getStock());
+        }
+
         return toDTO(productoRepository.save(producto));
     }
 
@@ -71,12 +75,15 @@ public class ProductoService {
         }
     }
 
+
+
     private ProductoDTO toDTO(Producto producto) {
         ProductoDTO dto = new ProductoDTO();
         dto.setId(producto.getId());
         dto.setNombre(producto.getNombre());
         dto.setPrecio(producto.getPrecio());
         dto.setCategoria(producto.getCategoria());
+        dto.setStock(producto.getStock());
         return dto;
     }
 
@@ -86,7 +93,10 @@ public class ProductoService {
         producto.setNombre(dto.getNombre());
         producto.setPrecio(dto.getPrecio());
         producto.setCategoria(dto.getCategoria());
+        producto.setStock(dto.getStock());
         return producto;
     }
+
+
 }
 

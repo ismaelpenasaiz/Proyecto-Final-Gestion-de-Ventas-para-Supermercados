@@ -19,5 +19,9 @@ public class ProductoDTO {
     @Positive(message = "El precio debe ser mayor a 0")
     private BigDecimal precio;
 
+    @NotNull
+    @Positive(message = "El stock debe ser mayor o igual a 0")
+    private Integer stock;
+
     private String categoria;
 }

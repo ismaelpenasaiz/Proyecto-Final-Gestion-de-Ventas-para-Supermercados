@@ -55,10 +55,19 @@ public class VentaService {
         // Crear detalles de venta
         List<VentaDetalle> detalles = request.getItems().stream().map(item -> {
 
-            // Buscar producto activo
+            // Buscar producto activo y verificacion de la cantidad en stock
             Producto producto = productoRepository.findActivoById(item.getProductoId())
                     .orElseThrow(() -> new IllegalArgumentException(
                             "El producto con ID " + item.getProductoId() + " no existe o no está activo."));
+
+            if (producto.getStock() < item.getCantidad()) {
+                throw new IllegalStateException(
+                        "Stock insuficiente para el producto: " + producto.getNombre()
+                );
+            }
+
+            // Descontar stock
+            producto.setStock(producto.getStock() - item.getCantidad());
 
             VentaDetalle detalle = new VentaDetalle();
             detalle.setVenta(venta);
