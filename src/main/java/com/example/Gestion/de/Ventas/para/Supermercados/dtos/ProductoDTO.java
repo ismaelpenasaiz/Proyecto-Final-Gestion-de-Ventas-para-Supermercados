@@ -23,5 +23,7 @@ public class ProductoDTO {
     @Positive(message = "El stock debe ser mayor o igual a 0")
     private Integer stock;
 
+    private Boolean activo;
+
     private String categoria;
 }

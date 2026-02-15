@@ -58,6 +58,10 @@ public class ProductoService {
             producto.setStock(dto.getStock());
         }
 
+        if (dto.getActivo() != null) {
+            producto.setActivo(dto.getActivo());
+        }
+
         return toDTO(productoRepository.save(producto));
     }
 
@@ -84,6 +88,7 @@ public class ProductoService {
         dto.setPrecio(producto.getPrecio());
         dto.setCategoria(producto.getCategoria());
         dto.setStock(producto.getStock());
+        dto.setActivo(producto.isActivo());
         return dto;
     }
 
