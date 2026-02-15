@@ -79,6 +79,7 @@ public class SucursalService {
         dto.setId(sucursal.getId());
         dto.setNombre(sucursal.getNombre());
         dto.setDireccion(sucursal.getDireccion());
+        dto.setActiva(sucursal.getActiva());
         return dto;
     }
 
